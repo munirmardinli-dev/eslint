@@ -6,8 +6,8 @@
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
-  "main": "lib/eslint.config.js",
-  "types": "lib/eslint.config.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "enginesStrict": true,
   "homepage": "https://munirmardinli-dev.github.io/homelab-cli",
   "publishConfig": {
@@ -29,8 +29,8 @@
   ],
   "exports": {
     ".": {
-      "import": "./lib/eslint.config.js",
-      "require": "./lib/eslint.config.js"
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -64,6 +64,15 @@
     "node": ">=18.0.0"
   },
   "peerDependencies": {
+    "eslint": "9.33.0",
+    "@typescript-eslint/eslint-plugin": "8.39.1",
+    "@typescript-eslint/parser": "8.39.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@types/eslint": "9.6.1",
     "@types/eslint-plugin-security": "^3.0.0",
@@ -83,5 +92,16 @@
     "eslint-plugin-yml": "^1.17.0",
     "jiti": "^2.5.1",
     "typescript": "^5.7.3"
+  },
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    },
+    "eslint-plugin-prettier": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
   }
 }

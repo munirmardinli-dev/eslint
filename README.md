@@ -27,35 +27,35 @@ yarn add --dev @munirmardinli-dev/eslint
 Create an `eslint.config.ts` (or `.js`) in your project root:
 
 ```typescript
-import createEslintConfig from '@munirmardinli-dev/eslint';
+import createEslintConfig from "@munirmardinli-dev/eslint";
 
 export default createEslintConfig({
-  files: ['src/**/*.ts', 'src/**/*.tsx'],
-  ignores: ['dist/', 'build/'],
-  tsProject: ['./tsconfig.json'],
-  yamlProjects: ['./tsconfig.json'],
+  files: ["src/**/*.ts", "src/**/*.tsx"],
+  ignores: ["dist/", "build/"],
+  tsProject: ["./tsconfig.json"],
+  yamlProjects: ["./tsconfig.json"],
 });
 ```
 
 ## Options
 
-| Option        | Type                | Description                                      |
-| ------------- | ------------------- | ------------------------------------------------ |
-| `files`       | `string[]`          | File patterns to lint                            |
-| `ignores`     | `string[]`          | File/folder patterns to ignore                   |
-| `tsProject`   | `string \| string[]`| Path(s) to your TypeScript config(s)             |
-| `yamlProjects`| `string[]`          | Path(s) to your YAML TypeScript config(s)        |
+| Option         | Type                 | Description                               |
+| -------------- | -------------------- | ----------------------------------------- |
+| `files`        | `string[]`           | File patterns to lint                     |
+| `ignores`      | `string[]`           | File/folder patterns to ignore            |
+| `tsProject`    | `string \| string[]` | Path(s) to your TypeScript config(s)      |
+| `yamlProjects` | `string[]`           | Path(s) to your YAML TypeScript config(s) |
 
 ## Example
 
 ```typescript
-import createEslintConfig from '@munirmardinli-dev/eslint';
+import createEslintConfig from "@munirmardinli-dev/eslint";
 
 export default createEslintConfig({
-  files: ['src/**/*.ts', 'src/**/*.tsx'],
-  ignores: ['dist/', 'build/'],
-  tsProject: ['./tsconfig.json'],
-  yamlProjects: ['./tsconfig.json'],
+  files: ["src/**/*.ts", "src/**/*.tsx"],
+  ignores: ["dist/", "build/"],
+  tsProject: ["./tsconfig.json"],
+  yamlProjects: ["./tsconfig.json"],
 });
 ```
 
