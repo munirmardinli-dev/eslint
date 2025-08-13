@@ -1,0 +1,30 @@
+# depencies
+node_modules/
+.npm
+
+# secrets
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+.env
+
+# build
+lib
+
+# documentation
+.qodo
+.cursor/PRD/index.md
+public
+
+#Ignore cursor AI rules
+.cursor\rules\codacy.mdc
+.cursor/rules
+.trunk
+.codacy
+venv
+.cache
+__pycache__
+docs/posts/global/index.md
+.obsidian
+protocoll
