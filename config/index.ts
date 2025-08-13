@@ -16,30 +16,29 @@ import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
 import { type EslintConfigOptions } from './types.js';
 
+const DEFAULT_CONFIG: Partial<EslintConfigOptions> = {
+  files: [],
+  ignores: [
+    'eslint.config.ts',
+    'node_modules/',
+    'lib/',
+    'public',
+    '/assets',
+    'config/docs',
+    'venv/',
+  ],
+  tsProject: [],
+  yamlProjects: [],
+};
+
 export default function createEslintConfig(options: EslintConfigOptions = {}) {
-  const {
-    files = ['**/*.ts'],
-    ignores = [
-      'eslint.config.ts',
-      'node_modules/',
-      'lib/',
-      'public',
-      '/assets',
-      'config/docs',
-      'venv/',
-    ],
-    tsProject = ['./config/tsconfig/tsconfig.eslint.json'],
-    yamlProjects = [
-      './packages/cli/tsconfig.json',
-      './config/tsconfig/tsconfig.eslint.json',
-    ],
-  } = options;
+const config = { ...DEFAULT_CONFIG, ...options };
 
 return defineConfig([
-  { files: files, plugins: { js }, extends: ['js/recommended'] },
+  { files: config.files, plugins: { js }, extends: ['js/recommended'] },
   pluginReact.configs.flat.recommended,
   {
-    files: files,
+    files: config.files,
     settings: {
       react: {
         version: 'detect',
@@ -47,23 +46,23 @@ return defineConfig([
     },
   },
   {
-    ignores: ignores,
+    ignores: config.ignores,
   },
   js.configs.recommended,
   {
-    files,
+    files: config.files,
     languageOptions: {
       parser,
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
-        project: tsProject,
+        project: config.tsProject,
       },
     },
     settings: {
       'import/resolver': {
         typescript: {
-          project: tsProject,
+          project: config.tsProject,
         },
         node: {
           extensions: ['.ts'],
@@ -244,7 +243,7 @@ return defineConfig([
       parser: yamlParser,
       parserOptions: {
         defaultYAMLVersion: '1.2',
-        project: yamlProjects,
+        project: config.yamlProjects,
       },
     },
     plugins: {
