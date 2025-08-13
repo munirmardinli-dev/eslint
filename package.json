@@ -2,7 +2,7 @@
   "name": "@munirmardinli-dev/eslint",
   "description": "A flexible and modern ESLint configuration for TypeScript, JavaScript, React, YAML, and JSON projects. Created by Munir Mardinli.",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
