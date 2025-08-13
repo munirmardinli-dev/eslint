@@ -10,5 +10,5 @@
     "declaration": true,
     "outDir": "./lib"
   },
-  "include": ["config/index.ts", "eslint.config.ts", "config/types.ts"]
+  "include": ["eslint.config.ts"]
 }
