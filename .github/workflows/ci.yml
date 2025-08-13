@@ -1,0 +1,123 @@
+name: Production CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  NPM_VERSION: "22"
+  REGISTRY_URL: "https://npm.pkg.github.com"
+  REPO_NAME: ${{ github.event.repository.name }}
+
+permissions:
+  contents: write
+  packages: write
+  pages: write
+  id-token: write
+  actions: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
+      package_version: ${{ steps.get-version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get package version
+        id: get-version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NPM_VERSION }}
+          cache: npm
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm install
+      - name: Set cache output
+        id: set-cache-output
+        run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+  typecheck:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run typecheck tool
+        run: npx tsc --noEmit
+  build-prod:
+    needs:
+      - typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Build application
+        run: npx tsc
+  check-audit-prod:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        working-directory: ${{ github.workspace }}
+
+  publish-package:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NPM_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Build application
+        run: npx tsc
+      - name: Verify package version
+        run: |
+          echo "Package version from package.json: $(node -p "require('./package.json').version")"
+          echo "Package name: $(node -p "require('./package.json').name")"
+      - name: Publish package to GitHub Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
