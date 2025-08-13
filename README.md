@@ -62,3 +62,11 @@ export default createEslintConfig({
 ## License
 
 MIT
+
+# install new version
+
+```bash
+npm config get registry
+npm cache clean --force
+npm install
+```

@@ -23,7 +23,7 @@ interface EslintConfigOptions {
   ignores?: string[];
 
   /** Path to tsconfig file(s) (e.g. './tsconfig.json') */
-  tsProject?: string | string[];
+  project?: string | string[];
   /** Path to YAML config files (e.g. ['./config.yml']) */
   yamlProjects?: string[];
 }
@@ -52,13 +52,13 @@ return defineConfig([
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
-        project: params.tsProject,
+        project: params.project,
       },
     },
     settings: {
       'import/resolver': {
         typescript: {
-          project: params.tsProject,
+          project: params.project,
         },
         node: {
           extensions: ['.ts'],
