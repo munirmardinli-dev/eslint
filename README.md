@@ -14,9 +14,9 @@ Created by Munir Mardinli.
 ## Installation
 
 ```sh
-npm install --save-dev @munirmardinli/eslint
+npm install --save-dev @munirmardinli-dev/eslint
 # or
-yarn add --dev @munirmardinli/eslint
+yarn add --dev @munirmardinli-dev/eslint
 ```
 
 > **Note:**  
@@ -27,7 +27,7 @@ yarn add --dev @munirmardinli/eslint
 Create an `eslint.config.ts` (or `.js`) in your project root:
 
 ```typescript
-import createEslintConfig from '@munirmardinli/eslint';
+import createEslintConfig from '@munirmardinli-dev/eslint';
 
 export default createEslintConfig({
   files: ['src/**/*.ts', 'src/**/*.tsx'],
@@ -49,7 +49,7 @@ export default createEslintConfig({
 ## Example
 
 ```typescript
-import createEslintConfig from '@munirmardinli/eslint';
+import createEslintConfig from '@munirmardinli-dev/eslint';
 
 export default createEslintConfig({
   files: ['src/**/*.ts', 'src/**/*.tsx'],
