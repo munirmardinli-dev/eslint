@@ -26,7 +26,7 @@ jobs:
       node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
       package_version: ${{ steps.get-version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Get package version
         id: get-version
         run: |
@@ -56,7 +56,7 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/cache@v4
         with:
           path: |
@@ -70,7 +70,7 @@ jobs:
       - typecheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/cache@v4
         with:
           path: |
@@ -83,8 +83,8 @@ jobs:
     needs: build-prod
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
       - uses: actions/cache@v4
         with:
           path: |
@@ -99,7 +99,7 @@ jobs:
     needs: build-prod
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
