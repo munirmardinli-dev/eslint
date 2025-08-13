@@ -1,7 +1,6 @@
 {
   "name": "@munirmardinli/eslint",
-  "description": "A eslint configuration for my projects.",
-  "private": false,
+"description": "A flexible and modern ESLint configuration for TypeScript, JavaScript, React, YAML, and JSON projects. Created by Munir Mardinli.",  "private": false,
   "version": "0.0.1",
   "sideEffects": false,
   "license": "MIT",
