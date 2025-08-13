@@ -8,7 +8,7 @@
   "main": "lib/eslint.config.js",
   "types": "lib/eslint.config.d.ts",
   "enginesStrict": true,
-  "homepage": "https://munirmardinli.github.io/homelab-cli",
+  "homepage": "https://munirmardinli-dev.github.io/homelab-cli",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
     "access": "public"
@@ -39,9 +39,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/munirmardinli-dev/eslint.git",
-    "directory": "Munir Mardinli",
-    "homepage": "https://github.com/munirmardinli-dev/eslint#readme"
+    "url": "git+https://github.com/munirmardinli-dev/eslint.git",
+    "directory": "Munir Mardinli"
   },
   "author": {
     "name": "Munir Mardinli",
