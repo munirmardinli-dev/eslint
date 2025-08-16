@@ -2,7 +2,7 @@
   "name": "@munirmardinli-dev/eslint",
   "description": "A flexible and modern ESLint configuration for TypeScript, JavaScript, React, YAML, and JSON projects. Created by Munir Mardinli.",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
@@ -10,10 +10,11 @@
   "types": "lib/index.d.ts",
   "enginesStrict": true,
   "homepage": "https://munirmardinli-dev.github.io/homelab-cli",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/munirmardinli-dev",
+ "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
+  "readmeFilename": "README.md",
   "sponsor": {
     "url": "https://linktr.ee/munirmardinli",
     "type": "individual",
@@ -52,7 +53,6 @@
     "type": "individual",
     "url": "https://linktr.ee/munirmardinli"
   },
-  "readmeFilename": "README.md",
   "contributors": [
     {
       "name": "Munir Mardinli",
