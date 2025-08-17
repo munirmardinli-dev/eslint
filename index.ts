@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import js from "@eslint/js";
 import parser from "@typescript-eslint/parser";
 import tseslintPlugin from "@typescript-eslint/eslint-plugin";
