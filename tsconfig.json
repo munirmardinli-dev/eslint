@@ -10,5 +10,5 @@
     "declaration": true,
     "outDir": "./lib"
   },
-  "include": ["index.ts","bin/cli.ts"]
+  "include": ["index.ts", "bin/cli.ts"]
 }
