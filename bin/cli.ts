@@ -1,30 +1,21 @@
 #!/usr/bin/env node
 import { ESLint } from "eslint";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
 async function run() {
   try {
     const require = createRequire(import.meta.url);
     const projectConfigPath = path.resolve(process.cwd(), "eslint.config.ts");
-    const jiti = require("jiti")(fileURLToPath(import.meta.url), {
-      interopDefault: true,
-      esmResolve: true,
-    });
-
-    const projectConfig = jiti(projectConfigPath);
-
+    const projectConfig = require(projectConfigPath);
     const eslint = new ESLint({
-      overrideConfig: projectConfig,
+      overrideConfig: projectConfig.default || projectConfig,
       overrideConfigFile: true,
       fix: process.argv.includes("--fix"),
     });
 
-    const results = await eslint.lintFiles(
-      process.argv.slice(2).filter((arg) => arg !== "--fix"),
-    );
-
+    const patterns = process.argv.slice(2).filter((arg) => arg !== "--fix");
+    const results = await eslint.lintFiles(patterns);
     const formatter = await eslint.loadFormatter("stylish");
     const resultText = formatter.format(results);
 
@@ -34,7 +25,7 @@ async function run() {
       process.exit(1);
     }
   } catch (error) {
-    console.error("Error running eslint:", error);
+    console.error("Error:", error);
     process.exit(1);
   }
 }
