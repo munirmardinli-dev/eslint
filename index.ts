@@ -15,7 +15,7 @@ import yamlParser from "yaml-eslint-parser";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 
-export default function createEslintConfig(params: {
+interface EslintConfigOptions {
   /** File patterns to include (e.g. ['src/**\/*.ts']) */
   files?: string[];
 
@@ -26,7 +26,9 @@ export default function createEslintConfig(params: {
   project?: string | string[];
   /** Path to YAML config files (e.g. ['./config.yml']) */
   yamlProjects?: string[];
-} = {}) {
+}
+
+export default function createEslintConfig(params: EslintConfigOptions = {}) {
   return defineConfig([
     { files: params.files, plugins: { js }, extends: ["js/recommended"] },
     pluginReact.configs.flat.recommended,

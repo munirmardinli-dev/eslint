@@ -113,7 +113,16 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: npx tsc
+      - name: Verify package version
+        run: |
+          echo "Package version from package.json: $(node -p "require('./package.json').version")"
+          echo "Package name: $(node -p "require('./package.json').name")"
+      - name: Authenticate with GitHub Packages
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
       - name: Publish package to GitHub Packages
-        run: npm publish --access public
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

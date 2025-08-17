@@ -4,22 +4,23 @@ on:
   push:
     branches: [main]
     paths:
-      - "config/**"
-      - "eslint.config.ts"
       - "package.json"
+      - "package-lock.json"
       - "tsconfig.json"
       - ".github/**"
   pull_request:
     branches: [main]
   schedule:
     - cron: "0 3 * * 0"
+
+permissions:
+    actions: read
+    contents: read
+    security-events: write
+
 env:
   NPM_VERSION: "22"
 
-permissions:
-      actions: read
-      contents: read
-      security-events: write
 jobs:
   analyze:
     name: Analyze
@@ -44,7 +45,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{  env.NPM_VERSION }}
+          node-version: ${{ env.NPM_VERSION }}
           cache: "npm"
 
       - name: Install dependencies
