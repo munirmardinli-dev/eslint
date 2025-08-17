@@ -11,7 +11,7 @@
   "enginesStrict": true,
   "homepage": "https://munirmardinli-dev.github.io/homelab-cli",
   "bin": {
-    "munirmardinli-eslint": "./lib/bin/cli.js"
+    "munirmardinli-eslint": "./lib/index.js"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/munirmardinli-dev",
@@ -66,9 +66,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "peerDependencies": {
-    "eslint": "9.33.0"
-  },
+  "peerDependencies": {},
   "dependencies": {
     "@eslint/js": "^9.32.0",
     "@types/eslint": "9.6.1",
@@ -93,19 +91,5 @@
     "@types/node": "^24.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.7.3"
-  },
-  "peerDependenciesMeta": {
-    "prettier": {
-      "optional": true
-    },
-    "eslint-plugin-prettier": {
-      "optional": true
-    },
-    "typescript": {
-      "optional": true
-    },
-    "eslint": {
-      "optional": false
-    }
   }
 }
